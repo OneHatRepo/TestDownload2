@@ -3,33 +3,23 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import * as ExpoFileSystem from 'expo-file-system';
 
-const FILES_DIR = ExpoFileSystem.documentDirectory,
-	downloadAndCacheFile = async (remoteUri, fileUri, progressCallback = null) => {
-		let downloadedFile;
-		if (progressCallback) {
-			// progressCallback is of signature: ({ totalBytesWritten, totalBytesExpectedToWrite }) => {}
-			const downloadResumable = ExpoFileSystem.createDownloadResumable(remoteUri, FILES_DIR + fileUri, {  }, progressCallback);
-			downloadedFile = await downloadResumable.downloadAsync();
-		} else {
-			downloadedFile = await ExpoFileSystem.downloadAsync(remoteUri, FILES_DIR + fileUri, {
-				headers,
-				sessionType: ExpoFileSystem.FileSystemSessionType.FOREGROUND,
-			})
-		}
-		if (downloadedFile.status !== 200) {
-			throw new Error(downloadedFile);
-		}
-	};
-
 
 export default function App() {
 
 	useEffect(() => {
 		(async () => {
-			
+
 			const
 				remoteUri = 'https://github.com/OneHatRepo/TestDownload/blob/master/assets/test.mp3?raw=true', 
 				fileUri = 'test.mp3',
+				downloadAndCacheFile = async (remoteUri, fileUri, progressCallback = null) => {
+					const
+						downloadResumable = ExpoFileSystem.createDownloadResumable(remoteUri, ExpoFileSystem.documentDirectory + fileUri, null, progressCallback),
+						downloadedFile = await downloadResumable.downloadAsync();
+					if (downloadedFile.status !== 200) {
+						throw new Error(downloadedFile);
+					}
+				},
 				progressCallback = ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
 					debugger;
 					const downloadedPercent = totalBytesWritten / totalBytesExpectedToWrite;
