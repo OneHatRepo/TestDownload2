@@ -11,21 +11,14 @@ export default function App() {
 
 			const
 				remoteUri = 'https://github.com/OneHatRepo/TestDownload/blob/master/assets/test.mp3?raw=true', 
-				fileUri = 'test.mp3',
-				downloadAndCacheFile = async (remoteUri, fileUri, progressCallback = null) => {
-					const
-						downloadResumable = ExpoFileSystem.createDownloadResumable(remoteUri, ExpoFileSystem.documentDirectory + fileUri, null, progressCallback),
-						downloadedFile = await downloadResumable.downloadAsync();
-					if (downloadedFile.status !== 200) {
-						throw new Error(downloadedFile);
-					}
-				},
-				progressCallback = ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
-					debugger;
+				downloadResumable = ExpoFileSystem.createDownloadResumable(remoteUri, ExpoFileSystem.documentDirectory + 'test.mp3', null, ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
 					const downloadedPercent = totalBytesWritten / totalBytesExpectedToWrite;
 					console.log(downloadedPercent);
-				};
-			await downloadAndCacheFile(remoteUri, fileUri, progressCallback);
+				}),
+				downloadedFile = await downloadResumable.downloadAsync();
+			if (downloadedFile.status !== 200) {
+				throw new Error(downloadedFile);
+			}
 
 		})();
 	}, [])
