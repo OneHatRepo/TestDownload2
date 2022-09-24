@@ -8,14 +8,17 @@ export default function App() {
 
 	useEffect(() => {
 		(async () => {
-
+			
 			const
 				remoteUri = 'https://github.com/OneHatRepo/TestDownload/blob/master/assets/test.mp3?raw=true', 
-				downloadResumable = ExpoFileSystem.createDownloadResumable(remoteUri, ExpoFileSystem.documentDirectory + 'test.mp3', null, ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
-					const downloadedPercent = totalBytesWritten / totalBytesExpectedToWrite;
-					console.log(downloadedPercent);
-				}),
-				downloadedFile = await downloadResumable.downloadAsync();
+				// downloadResumable = ExpoFileSystem.createDownloadResumable(remoteUri, ExpoFileSystem.documentDirectory + 'test.mp3', null, ({ totalBytesWritten, totalBytesExpectedToWrite }) => {
+				// 	const downloadedPercent = totalBytesWritten / totalBytesExpectedToWrite;
+				// 	console.log(downloadedPercent);
+				// }),
+				// downloadedFile = await downloadResumable.downloadAsync();
+				downloadedFile = await ExpoFileSystem.downloadAsync(remoteUri, ExpoFileSystem.documentDirectory + 'test.mp3', {
+					sessionType: ExpoFileSystem.FileSystemSessionType.FOREGROUND,
+				});
 			if (downloadedFile.status !== 200) {
 				throw new Error(downloadedFile);
 			}
