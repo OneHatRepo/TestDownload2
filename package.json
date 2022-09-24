@@ -3,20 +3,41 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "npx expo start -c",
+    "esp": "cp .env.production .env && echo GIT_COMMIT=$(git rev-parse --short origin/master) >> .env && npx expo start --dev-client --lan -c",
+    "ess": "cp .env.staging .env && echo GIT_COMMIT=$(git rev-parse --short origin/staging) >> .env && npx expo start --dev-client --lan -c",
+    "est": "cp .env.testing .env && echo GIT_COMMIT=$(git rev-parse --short origin/testing) >> .env && npx expo start --dev-client --lan -c",
+    "esd": "cp .env.dev .env && echo GIT_COMMIT=$(git rev-parse --short origin/testing) >> .env && EXPO_DEBUG=1 npx expo start --dev-client --lan -c",
+    "ebp": "cp .env.production .env && echo GIT_COMMIT=$(git rev-parse --short origin/master) >> .env && eas build --profile production",
+    "ebs": "cp .env.staging .env && echo GIT_COMMIT=$(git rev-parse --short origin/staging) >> .env && eas build --profile staging",
+    "ebt": "cp .env.testing .env && echo GIT_COMMIT=$(git rev-parse --short origin/testing) >> .env && eas build --profile testing",
+    "ebd": "cp .env.dev .env && echo GIT_COMMIT=$(git rev-parse --short origin/testing) >> .env && eas build --profile dev",
+    "ebd2": "cp .env.dev .env && echo GIT_COMMIT=$(git rev-parse --short origin/testing) >> .env && eas build --profile dev2",
+    "ebw": "npx expo export:web",
+    "eup": "cp .env.production .env && echo GIT_COMMIT=$(git rev-parse --short origin/master) >> .env && eas update --branch production",
+    "eus": "cp .env.staging .env && echo GIT_COMMIT=$(git rev-parse --short origin/staging) >> .env && eas update --branch staging",
+    "eut": "cp .env.testing .env && echo GIT_COMMIT=$(git rev-parse --short origin/testing) >> .env && eas update --branch testing",
+    "eud": "cp .env.default .env && echo GIT_COMMIT=$(git rev-parse --short origin/testing) >> .env && eas update --branch default",
+    "start": "npx expo start --dev-client",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "expo": "~46.0.9",
-    "expo-file-system": "^14.1.0",
+    "expo-dev-client": "~1.2.1",
+    "expo-file-system": "~14.1.0",
     "expo-status-bar": "~1.4.0",
+    "expo-updates": "~0.14.3",
     "react": "18.0.0",
     "react-native": "0.69.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/runtime": "^7.18.3",
+    "@expo/metro-config": "^0.3.22",
+    "babel-preset-expo": "~9.2.0"
   },
   "private": true
 }

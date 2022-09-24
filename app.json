@@ -1,8 +1,19 @@
 {
   "expo": {
-    "name": "TestDownload",
-    "slug": "TestDownload",
+    "name": "TestDownload2",
+    "slug": "testdownload2",
+	"owner": "onehat",
     "version": "1.0.0",
+	"privacy": "unlisted",
+	"jsEngine": "hermes",
+	"runtimeVersion": {
+		"policy": "sdkVersion"
+	},
+	"platforms": [
+		"ios",
+		"android",
+		"web"
+	],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,13 +29,30 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+		"supportsTablet": true,
+		"requireFullScreen": true,
+		"isTabletOnly": false,
+		"usesIcloudStorage": false,
+		"usesAppleSignIn": false,
+		"accessesContactNotes": false,
+		"infoPlist": {
+			"UIBackgroundModes": [
+				"audio"
+			]
+		}
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+	  "package": "com.testdownload2",
+	  "versionCode": 3,
+	  "permissions": [
+		  "READ_EXTERNAL_STORAGE",
+		  "WRITE_EXTERNAL_STORAGE",
+		  "INTERNET"
+	  ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
