@@ -8,22 +8,22 @@ export default ({ config }) => { // Cannot contain any promises
 	
 	switch(process.env.CHANNEL) {
 		case 'staging':
-			config.name = 'WSCinME Staging';
+			config.name = 'TestDownload2 Staging';
 			config.extra.subdomain = 'staging';
 			break;
 		case 'testing':
-			config.name = 'WSCinME Testing';
+			config.name = 'TestDownload2 Testing';
 			config.extra.subdomain = 'testing';
 			break;
 		case 'dev':
-			config.name = 'WSCinME Dev';
+			config.name = 'TestDownload2 Dev';
 			config.extra.subdomain = 'dev';
 			break;
 		case 'production':
 		default:
 			config.extra.subdomain = 'app';
 	}
-	const reverseDomain = 'com.wscinme.' + config.extra.subdomain;
+	const reverseDomain = 'com.testdownload2.' + config.extra.subdomain;
 	config.ios.bundleIdentifier = reverseDomain + '1';
 	config.ios.buildNumber = config.version;
 	config.android.package = reverseDomain;

@@ -29,6 +29,8 @@
       "**/*"
     ],
     "ios": {
+		"bundleIdentifier": "*** dynamically set in app.config.js ***",
+		"buildNumber": "*** dynamically set in app.config.js ***",
 		"supportsTablet": true,
 		"requireFullScreen": true,
 		"isTabletOnly": false,
@@ -46,7 +48,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-	  "package": "com.testdownload2",
+	  "package": "*** dynamically set in app.config.js ***",
 	  "versionCode": 3,
 	  "permissions": [
 		  "READ_EXTERNAL_STORAGE",
