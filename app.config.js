@@ -24,7 +24,7 @@ export default ({ config }) => { // Cannot contain any promises
 			config.extra.subdomain = 'app';
 	}
 	const reverseDomain = 'com.testdownload2.' + config.extra.subdomain;
-	config.ios.bundleIdentifier = reverseDomain + '1';
+	config.ios.bundleIdentifier = reverseDomain;
 	config.ios.buildNumber = config.version;
 	config.android.package = reverseDomain;
 
